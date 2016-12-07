@@ -29,14 +29,11 @@ endif
 # All Target
 all: example.elf
 
-dependents:
-	-cd /Users/user/WORK/stm32/stm32l476g-disco_hal_lib/Debug && $(MAKE) all
-
 # Tool invocations
-example.elf: $(OBJS) $(USER_OBJS) /Users/user/WORK/stm32/stm32l476g-disco_hal_lib/Debug/libstm32l476g-disco_hal_lib.a
+example.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: MCU GCC Linker'
-	arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -L"/Users/user/WORK/stm32/stm32l476g-disco_hal_lib/Debug" -T"/Users/user/WORK/stm32/example/LinkerScript.ld" -Wl,-Map=output.map -Wl,--gc-sections -lm -o "example.elf" @"objects.list" $(USER_OBJS) $(LIBS)
+	arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -L"D:\work\projects\eclipse_projects\stm32l476g-disco_hal_lib\Debug" -T"D:\work\projects\eclipse_projects\example\LinkerScript.ld" -Wl,-Map=output.map -Wl,--gc-sections -lm -o "example.elf" @"objects.list" $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 	$(MAKE) --no-print-directory post-build
@@ -54,6 +51,5 @@ post-build:
 
 .PHONY: all clean dependents
 .SECONDARY: post-build
-/Users/user/WORK/stm32/stm32l476g-disco_hal_lib/Debug/libstm32l476g-disco_hal_lib.a:
 
 -include ../makefile.targets
