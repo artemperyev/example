@@ -11,8 +11,9 @@
 
 #include "stm32l4xx.h"
 #include "stm32l476g_discovery.h"
+#include "stm32l4xx_hal.h"
 			
-
+/*
 #define JOY_CENTER_PORT            	GPIOA
 #define JOY_CENTER_PIN             	GPIO_PIN_0
 #define JOY_PORT_CLK		        __HAL_RCC_GPIOA_CLK_ENABLE()
@@ -111,3 +112,31 @@ int main(void)
 
 	}
 }
+
+*/
+
+
+int main(void)
+{
+	BSP_LED_Init(LED_RED);
+	BSP_LED_Init(LED_GREEN);
+
+	BSP_JOY_Init(JOY_SEL);
+	BSP_JOY_Init(JOY_LEFT);
+	BSP_JOY_Init(JOY_RIGHT);
+	BSP_JOY_Init(JOY_DOWN);
+	BSP_JOY_Init(JOY_UP);
+
+	SysTick_Config(HAL_RCC_GetHCLKFreq()/1000);
+
+	uint32_t delay_time = 1000;
+
+	while(1)
+	{
+		BSP_LED_On(LED_RED);
+		HAL_Delay(delay_time);
+		BSP_LED_Off(LED_RED);
+		HAL_Delay(delay_time);
+	}
+}
+
